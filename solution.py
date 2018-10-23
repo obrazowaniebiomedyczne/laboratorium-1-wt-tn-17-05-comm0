@@ -63,7 +63,18 @@ def checkerboard(size):
 4 - Interpolacja najbliższych sąsiadów.
 """
 def nn_interpolation(source, new_size):
-    pass
+
+    w_destination, h_destination = new_size
+    h_source, w_source = source.shape
+
+
+    ratio_x = w_source / w_destination
+    ratio_y = h_source / h_destination
+    image = np.zeros(new_size).astype(np.uint8)
+    for (i, j) in np.ndindex(image.shape):
+        image[i, j] = source[int(i*ratio_y), int(j*ratio_x)]
+
+    return image
 
 """
 5 - Interpolacja dwuliniowa
